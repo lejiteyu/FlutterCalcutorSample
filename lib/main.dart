@@ -57,9 +57,8 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   double _counter = 0;
-  String ssss ="11+22÷11+25%13+23x-.5";
   String _appVersion = '0.0.0';
-  String _calcuator = '';
+  String _calcuator = '0.0';
   double padNum = 2;
   bool isStartCal=false;
   @override
@@ -67,18 +66,6 @@ class _MyHomePageState extends State<MyHomePage> {
     // TODO: implement initState
     super.initState();
     initVersion();
-  }
-
-  void _incrementCounter() {
-    setState(() {
-      // This call to setState tells the Flutter framework that something has
-      // changed in this State, which causes it to rerun the build method below
-      // so that the display can reflect the updated values. If we changed
-      // _counter without calling setState(), then the build method would not be
-      // called again, and so nothing would appear to happen.
-
-      _counter=Calcuator().init(ssss);
-    });
   }
 
   void _setData(String v){
@@ -127,7 +114,25 @@ class _MyHomePageState extends State<MyHomePage> {
           break;
       }
     });
+  }
 
+  void showMyMaterialDialog(BuildContext context) {
+    showDialog(
+        context: context,
+        builder: (context) {
+          return new AlertDialog(
+            title: new Text("title"),
+            content: new Text("這是Lyon 使用Flutter 開發的計算機範例！"),
+            actions: <Widget>[
+              new FlatButton(
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
+                child: new Text("確認"),
+              ),
+            ],
+          );
+        });
   }
 
   @override
@@ -156,10 +161,11 @@ class _MyHomePageState extends State<MyHomePage> {
               decoration: BoxDecoration(color: Colors.grey),
             ),
             ListTile(
-              leading: Icon(Icons.star),
+              leading: Icon(Icons.info),
               title: Text('關於我'),
               onTap: () {
                 Navigator.pop(context);
+                showMyMaterialDialog(context);
               },
             ),
           ],
@@ -168,314 +174,320 @@ class _MyHomePageState extends State<MyHomePage> {
       body: Center(
         // Center is a layout widget. It takes a single child and positions it
         // in the middle of the parent.
-        child: Column(
-          // Column is also a layout widget. It takes a list of children and
-          // arranges them vertically. By default, it sizes itself to fit its
-          // children horizontally, and tries to be as tall as its parent.
-          //
-          // Invoke "debug painting" (press "p" in the console, choose the
-          // "Toggle Debug Paint" action from the Flutter Inspector in Android
-          // Studio, or the "Toggle Debug Paint" command in Visual Studio Code)
-          // to see the wireframe for each widget.
-          //
-          // Column has various properties to control how it sizes itself and
-          // how it positions its children. Here we use mainAxisAlignment to
-          // center the children vertically; the main axis here is the vertical
-          // axis because Columns are vertical (the cross axis would be
-          // horizontal).
-          mainAxisAlignment: MainAxisAlignment.start,
-          children: <Widget>[
-            Text(
-              '$_calcuator',
+        child:new SingleChildScrollView(
 
-              style: Theme.of(context).textTheme.headline2,
-            ),
-            Row(
-              //mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: <Widget>[
-                Container(
-                  //margin:EdgeInsets.only(left: padNum,right: padNum),
-                  child: ButtonTheme(
-                    buttonColor: Colors.lightBlue,
+          child: Column(
+            // Column is also a layout widget. It takes a list of children and
+            // arranges them vertically. By default, it sizes itself to fit its
+            // children horizontally, and tries to be as tall as its parent.
+            //
+            // Invoke "debug painting" (press "p" in the console, choose the
+            // "Toggle Debug Paint" action from the Flutter Inspector in Android
+            // Studio, or the "Toggle Debug Paint" command in Visual Studio Code)
+            // to see the wireframe for each widget.
+            //
+            // Column has various properties to control how it sizes itself and
+            // how it positions its children. Here we use mainAxisAlignment to
+            // center the children vertically; the main axis here is the vertical
+            // axis because Columns are vertical (the cross axis would be
+            // horizontal).
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: <Widget>[
+              Text(
+                '$_calcuator',
 
-                    child: RaisedButton(
-                      onPressed: () {
-                        _setData('%');
-                      },
-                      child: Text('%'),
+                style: Theme.of(context).textTheme.headline2,
+              ),
+              Row(
+                //mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: <Widget>[
+                  Container(
+                    //margin:EdgeInsets.only(left: padNum,right: padNum),
+                    child: ButtonTheme(
+                      buttonColor: Colors.lightBlue,
+
+                      child: RaisedButton(
+                        onPressed: () {
+                          _setData('%');
+                        },
+                        child: Text('%'),
+                      ),
                     ),
                   ),
-                ),
-                Container(
-                  //margin:EdgeInsets.only(left: padNum,right: padNum),
-                  child: ButtonTheme(
-                  buttonColor: Colors.lightBlue,
+                  Container(
+                    //margin:EdgeInsets.only(left: padNum,right: padNum),
+                    child: ButtonTheme(
+                      buttonColor: Colors.lightBlue,
 
-                    child: RaisedButton(
-                      onPressed: () {
-                        _setData('C');
-                      },
-                      child: Text('C'),
-                  ),
-                ),
-                ),
-                Container(
-                  //margin:EdgeInsets.only(left: padNum,right: padNum),
-                  child: ButtonTheme(
-                    buttonColor: Colors.lightBlue,
-
-                    child: RaisedButton(
-                      onPressed: () {
-                        _setData('<-');
-                      },
-                      child: Text('<-'),
+                      child: RaisedButton(
+                        onPressed: () {
+                          _setData('C');
+                        },
+                        child: Text('C'),
+                      ),
                     ),
                   ),
-                ),
-                Container(
-                  //margin:EdgeInsets.only(left: padNum,right: padNum),
-                  child: ButtonTheme(
-                    buttonColor: Colors.lightBlue,
+                  Container(
+                    //margin:EdgeInsets.only(left: padNum,right: padNum),
+                    child: ButtonTheme(
+                      buttonColor: Colors.lightBlue,
 
-                    child: RaisedButton(
-                      onPressed: () {
-                        _setData('÷');
-                      },
-                      child: Text('÷'),
+                      child: RaisedButton(
+                        onPressed: () {
+                          _setData('<-');
+                        },
+                        child: Text('<-'),
+                      ),
                     ),
                   ),
-                ),
-              ],
-            ),
-            Row(
-              //mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: <Widget>[
-                Container(
-                  //margin:EdgeInsets.only(left: padNum,right: padNum),
-                  child: ButtonTheme(
-                    buttonColor: Colors.lightBlue,
+                  Container(
+                    //margin:EdgeInsets.only(left: padNum,right: padNum),
+                    child: ButtonTheme(
+                      buttonColor: Colors.lightBlue,
 
-                    child: RaisedButton(
-                      onPressed: () {
-                        _setData('7');
-                      },
-                      child: Text('7'),
+                      child: RaisedButton(
+                        onPressed: () {
+                          _setData('÷');
+                        },
+                        child: Text('÷'),
+                      ),
                     ),
                   ),
-                ),
-                Container(
-                  //margin:EdgeInsets.only(left: padNum,right: padNum),
-                  child: ButtonTheme(
-                    buttonColor: Colors.lightBlue,
+                ],
+              ),
+              Row(
+                //mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: <Widget>[
+                  Container(
+                    //margin:EdgeInsets.only(left: padNum,right: padNum),
+                    child: ButtonTheme(
+                      buttonColor: Colors.lightBlue,
 
-                    child: RaisedButton(
-                      onPressed: () {
-                        _setData('8');
-                      },
-                      child: Text('8'),
+                      child: RaisedButton(
+                        onPressed: () {
+                          _setData('7');
+                        },
+                        child: Text('7'),
+                      ),
                     ),
                   ),
-                ),
-                Container(
-                  //margin:EdgeInsets.only(left: padNum,right: padNum),
-                  child: ButtonTheme(
-                    buttonColor: Colors.lightBlue,
+                  Container(
+                    //margin:EdgeInsets.only(left: padNum,right: padNum),
+                    child: ButtonTheme(
+                      buttonColor: Colors.lightBlue,
 
-                    child: RaisedButton(
-                      onPressed: () {
-                        _setData('9');
-                      },
-                      child: Text('9'),
+                      child: RaisedButton(
+                        onPressed: () {
+                          _setData('8');
+                        },
+                        child: Text('8'),
+                      ),
                     ),
                   ),
-                ),
-                Container(
-                  //margin:EdgeInsets.only(left: padNum,right: padNum),
-                  child: ButtonTheme(
-                    buttonColor: Colors.lightBlue,
+                  Container(
+                    //margin:EdgeInsets.only(left: padNum,right: padNum),
+                    child: ButtonTheme(
+                      buttonColor: Colors.lightBlue,
 
-                    child: RaisedButton(
-                      onPressed: () {
-                        _setData('x');
-                      },
-                      child: Text('x'),
+                      child: RaisedButton(
+                        onPressed: () {
+                          _setData('9');
+                        },
+                        child: Text('9'),
+                      ),
                     ),
                   ),
-                ),
-              ],
-            ),
-            Row(
-              children: <Widget>[
-                Container(
-                  //margin:EdgeInsets.only(left: padNum,right: padNum),
-                  child: ButtonTheme(
-                    buttonColor: Colors.lightBlue,
+                  Container(
+                    //margin:EdgeInsets.only(left: padNum,right: padNum),
+                    child: ButtonTheme(
+                      buttonColor: Colors.lightBlue,
 
-                    child: RaisedButton(
-                      onPressed: () {
-                        _setData('4');
-                      },
-                      child: Text('4'),
+                      child: RaisedButton(
+                        onPressed: () {
+                          _setData('x');
+                        },
+                        child: Text('x'),
+                      ),
                     ),
                   ),
-                ),
-                Container(
-                  //margin:EdgeInsets.only(left: padNum,right: padNum),
-                  child: ButtonTheme(
-                    buttonColor: Colors.lightBlue,
+                ],
+              ),
+              Row(
+                children: <Widget>[
+                  Container(
+                    //margin:EdgeInsets.only(left: padNum,right: padNum),
+                    child: ButtonTheme(
+                      buttonColor: Colors.lightBlue,
 
-                    child: RaisedButton(
-                      onPressed: () {
-                        _setData('5');
-                      },
-                      child: Text('5'),
+                      child: RaisedButton(
+                        onPressed: () {
+                          _setData('4');
+                        },
+                        child: Text('4'),
+                      ),
                     ),
                   ),
-                ),
-                Container(
-                  //margin:EdgeInsets.only(left: padNum,right: padNum),
-                  child: ButtonTheme(
-                    buttonColor: Colors.lightBlue,
+                  Container(
+                    //margin:EdgeInsets.only(left: padNum,right: padNum),
+                    child: ButtonTheme(
+                      buttonColor: Colors.lightBlue,
 
-                    child: RaisedButton(
-                      onPressed: () {
-                        _setData('6');
-                      },
-                      child: Text('6'),
+                      child: RaisedButton(
+                        onPressed: () {
+                          _setData('5');
+                        },
+                        child: Text('5'),
+                      ),
                     ),
                   ),
-                ),
-                Container(
-                  //margin:EdgeInsets.only(left: padNum,right: padNum),
-                  child: ButtonTheme(
-                    buttonColor: Colors.lightBlue,
+                  Container(
+                    //margin:EdgeInsets.only(left: padNum,right: padNum),
+                    child: ButtonTheme(
+                      buttonColor: Colors.lightBlue,
 
-                    child: RaisedButton(
-                      onPressed: () {
-                        _setData('-');
-                      },
-                      child: Text('-'),
+                      child: RaisedButton(
+                        onPressed: () {
+                          _setData('6');
+                        },
+                        child: Text('6'),
+                      ),
                     ),
                   ),
-                ),
-              ],
-            ),
-            Row(
-              //mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: <Widget>[
-                SizedBox(
-                  ////margin:EdgeInsets.only(left: padNum,right: padNum),
-                  child: ButtonTheme(
-                    buttonColor: Colors.lightBlue,
+                  Container(
+                    //margin:EdgeInsets.only(left: padNum,right: padNum),
+                    child: ButtonTheme(
+                      buttonColor: Colors.lightBlue,
 
-                    child: RaisedButton(
-                      onPressed: () {
-                        _setData('1');
-                      },
-                      child: Text('1'),
+                      child: RaisedButton(
+                        onPressed: () {
+                          _setData('-');
+                        },
+                        child: Text('-'),
+                      ),
                     ),
                   ),
-                ),
-                Container(
-                  ////margin:EdgeInsets.only(left: padNum,right: padNum),
-                  child: ButtonTheme(
-                    buttonColor: Colors.lightBlue,
+                ],
+              ),
+              Row(
+                //mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: <Widget>[
+                  SizedBox(
+                    ////margin:EdgeInsets.only(left: padNum,right: padNum),
+                    child: ButtonTheme(
+                      buttonColor: Colors.lightBlue,
 
-                    child: RaisedButton(
-                      onPressed: () {
-                        _setData('2');
-                      },
-                      child: Text('2'),
+                      child: RaisedButton(
+                        onPressed: () {
+                          _setData('1');
+                        },
+                        child: Text('1'),
+                      ),
                     ),
                   ),
-                ),
-                Container(
-                  //margin:EdgeInsets.only(left: padNum,right: padNum),
-                  child: ButtonTheme(
-                    buttonColor: Colors.lightBlue,
+                  Container(
+                    ////margin:EdgeInsets.only(left: padNum,right: padNum),
+                    child: ButtonTheme(
+                      buttonColor: Colors.lightBlue,
 
-                    child: RaisedButton(
-                      onPressed: () {
-                        _setData('3');
-                      },
-                      child: Text('3'),
+                      child: RaisedButton(
+                        onPressed: () {
+                          _setData('2');
+                        },
+                        child: Text('2'),
+                      ),
                     ),
                   ),
-                ),
-                Container(
-                  //margin:EdgeInsets.only(left: padNum,right: padNum),
-                  child: ButtonTheme(
-                    buttonColor: Colors.lightBlue,
+                  Container(
+                    //margin:EdgeInsets.only(left: padNum,right: padNum),
+                    child: ButtonTheme(
+                      buttonColor: Colors.lightBlue,
 
-                    child: RaisedButton(
-                      onPressed: () {
-                        _setData('+');
-                      },
-                      child: Text('+'),
+                      child: RaisedButton(
+                        onPressed: () {
+                          _setData('3');
+                        },
+                        child: Text('3'),
+                      ),
                     ),
                   ),
-                ),
-              ],
-            ),
-            Row(
-              //mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: <Widget>[
-                Container(
-                  //margin:EdgeInsets.only(left: padNum,right: padNum),
-                  child: ButtonTheme(
-                    buttonColor: Colors.lightBlue,
+                  Container(
+                    //margin:EdgeInsets.only(left: padNum,right: padNum),
+                    child: ButtonTheme(
+                      buttonColor: Colors.lightBlue,
 
-                    child: RaisedButton(
-                      onPressed: () {
-                        _setData('.');
-                      },
-                      child: Text('.'),
+                      child: RaisedButton(
+                        onPressed: () {
+                          _setData('+');
+                        },
+                        child: Text('+'),
+                      ),
                     ),
                   ),
-                ),
-                Container(
-                  //margin:EdgeInsets.only(left: padNum,right: padNum),
-                  child: ButtonTheme(
-                    buttonColor: Colors.lightBlue,
+                ],
+              ),
+              Row(
+                //mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: <Widget>[
+                  Container(
+                    //margin:EdgeInsets.only(left: padNum,right: padNum),
+                    child: ButtonTheme(
+                      buttonColor: Colors.lightBlue,
 
-                    child: RaisedButton(
-                      onPressed: () {
-                        _setData('0');
-                      },
-                      child: Text('0'),
+                      child: RaisedButton(
+                        onPressed: () {
+                          _setData('.');
+                        },
+                        child: Text('.'),
+                      ),
                     ),
                   ),
-                ),
-                Container(
-                  //margin:EdgeInsets.only(left: padNum,right: padNum),
-                  child: ButtonTheme(
-                    buttonColor: Colors.lightBlue,
+                  Container(
+                    //margin:EdgeInsets.only(left: padNum,right: padNum),
+                    child: ButtonTheme(
+                      buttonColor: Colors.lightBlue,
 
-                    child: RaisedButton(
-                      onPressed: () {
-                        _setData('+/-');
-                      },
-                      child: Text('+/-'),
+                      child: RaisedButton(
+                        onPressed: () {
+                          _setData('0');
+                        },
+                        child: Text('0'),
+                      ),
                     ),
                   ),
-                ),
-                Container(
-                  //margin:EdgeInsets.only(left: padNum,right: padNum),
-                  child: ButtonTheme(
-                    buttonColor: Colors.lightBlue,
+                  Container(
+                    //margin:EdgeInsets.only(left: padNum,right: padNum),
+                    child: ButtonTheme(
+                      buttonColor: Colors.lightBlue,
 
-                    child: RaisedButton(
-                      onPressed: () {
-                        _setData('=');
-                      },
-                      child: Text('='),
+                      child: RaisedButton(
+                        onPressed: () {
+                          _setData('+/-');
+                        },
+                        child: Text('+/-'),
+                      ),
                     ),
                   ),
-                ),
-              ],
-            ),
-          ],
-        ),
+                  Container(
+                    //margin:EdgeInsets.only(left: padNum,right: padNum),
+                    child: ButtonTheme(
+                      buttonColor: Colors.lightBlue,
+
+                      child: RaisedButton(
+                        onPressed: () {
+                          _setData('=');
+                        },
+                        child: Text('='),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ],
+          ),
+        )
+
+      ,
+
       ),
 //      floatingActionButton: FloatingActionButton(
 //        onPressed: _incrementCounter,
