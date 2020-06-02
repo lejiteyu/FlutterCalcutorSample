@@ -4,9 +4,19 @@ import 'package:flutter/material.dart';
 import 'calcuator.dart';
 import 'package:transparent_image/transparent_image.dart';
 import 'package:package_info/package_info.dart';
+import 'package:easy_localization/easy_localization.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 
 void main() {
-  runApp(MyApp());
+  runApp(
+      EasyLocalization(
+          child: MyApp(),
+        // 支持的语言
+        supportedLocales: [Locale('zh', 'CN'), Locale('en', 'US')],
+        // 语言资源包目录
+        path: 'resources/langs',
+      )
+  );
 }
 
 class MyApp extends StatelessWidget {
@@ -15,6 +25,15 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Lyon 的Flutter計算機',
+      //導入語言包
+      localizationsDelegates: [
+        GlobalMaterialLocalizations.delegate,
+        GlobalWidgetsLocalizations.delegate,
+        EasyLocalization.of(context).delegate,
+      ],
+      supportedLocales: EasyLocalization.of(context).supportedLocales,
+      locale: EasyLocalization.of(context).locale,
+
       theme: ThemeData(
         // This is the theme of your application.
         //
@@ -31,7 +50,7 @@ class MyApp extends StatelessWidget {
         // closer together (more dense) than on mobile platforms.
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
-      home: MyHomePage(title: 'Lyon 的Flutter計算機'),
+      home: MyHomePage(title: tr('title')),
       debugShowCheckedModeBanner: false,
     );
   }
@@ -122,17 +141,44 @@ class _MyHomePageState extends State<MyHomePage> {
         builder: (context) {
           return new AlertDialog(
             title: new Text("title"),
-            content: new Text("這是Lyon 使用Flutter 開發的計算機範例！"),
+            content: new Text(
+              tr('title'),
+              // 加大字体, 便于演示
+              style: TextStyle(fontSize: 30),),
             actions: <Widget>[
               new FlatButton(
                 onPressed: () {
                   Navigator.of(context).pop();
                 },
-                child: new Text("確認"),
+                child: new Text(tr('ok')),
               ),
             ],
           );
         });
+  }
+
+  void showChangeLanguageDialog(){
+    showDialog(context: context, builder: (BuildContext context){
+      return SimpleDialog(
+        title: Text("Language"),
+        children: [
+          SimpleDialogOption(
+            child: Text("中文"),
+            onPressed: (){
+              EasyLocalization.of(context).locale = Locale('zh', 'CN');
+              Navigator.pop(context);
+            },
+          ),
+          SimpleDialogOption(
+            child: Text("English"),
+            onPressed: (){
+              EasyLocalization.of(context).locale = Locale('en', 'US');
+              Navigator.pop(context);
+            },
+          )
+        ],
+      );
+    });
   }
 
   @override
@@ -150,6 +196,9 @@ class _MyHomePageState extends State<MyHomePage> {
         // Here we take the value from the MyHomePage object that was created by
         // the App.build method, and use it to set our appbar title.
         title: Text(widget.title),
+        actions: [
+          IconButton(icon: Icon(Icons.language), onPressed: ()=>showChangeLanguageDialog(),)
+        ],
       ),
       drawer: Drawer(
         child: ListView(
@@ -157,7 +206,7 @@ class _MyHomePageState extends State<MyHomePage> {
             UserAccountsDrawerHeader(
               accountName: Text('Lyon flutter make app'),
               accountEmail: Text(_appVersion),
-              currentAccountPicture: Image.asset('images/lyonhsu3_t.png'),
+              currentAccountPicture: Image.asset('resources/images/lyonhsu3_t.png'),
               decoration: BoxDecoration(color: Colors.grey),
             ),
             ListTile(
