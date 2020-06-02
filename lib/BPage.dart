@@ -45,20 +45,25 @@ class _BPage extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: <Widget>[
               Expanded(
-                child: Image.asset('images/record.png'),
+                child: Image.asset('resources/images/record.png'),
+              ),
+              Visibility(
+                visible: true,
+                child:  Expanded(
+                  child: Image.asset('resources/images/record.png'),
+                ),
               ),
               Expanded(
-                child: Image.asset('images/record.png'),
+                child: Image.asset('resources/images/record.png'),
               ),
               Expanded(
-                child: Image.asset('images/record.png'),
+                child: Image.asset('resources/images/record.png'),
               ),
             ],
           ),
         ],
       )
-
-
     );
   }
 }
+
