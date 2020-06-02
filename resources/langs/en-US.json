@@ -1,4 +1,8 @@
 {
   "title":"This calcuator app is Lyon developed from Flutter !",
-  "ok": "ok"
+  "ok": "ok",
+  "about_Me": "about me",
+  "next_page": "next page",
+  "page_b_title": "I am B page.",
+  "back_front_page": "back front page."
 }

@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'BPage.dart';
 import 'calcuator.dart';
 import 'package:transparent_image/transparent_image.dart';
 import 'package:package_info/package_info.dart';
@@ -211,10 +212,18 @@ class _MyHomePageState extends State<MyHomePage> {
             ),
             ListTile(
               leading: Icon(Icons.info),
-              title: Text('關於我'),
+              title: Text(tr('about_Me')),
               onTap: () {
                 Navigator.pop(context);
                 showMyMaterialDialog(context);
+              },
+            ),
+            ListTile(
+              leading: Icon(Icons.more),
+              title: Text(tr('next_page')),
+              onTap: () {
+                Navigator.pop(context);
+                Navigator.push(context, MaterialPageRoute(builder: (context) => BPage()));
               },
             ),
           ],
