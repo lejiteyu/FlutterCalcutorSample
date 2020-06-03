@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'BPage.dart';
+import 'CPage.dart';
 import 'calcuator.dart';
 import 'package:transparent_image/transparent_image.dart';
 import 'package:package_info/package_info.dart';
@@ -224,6 +225,14 @@ class _MyHomePageState extends State<MyHomePage> {
               onTap: () {
                 Navigator.pop(context);
                 Navigator.push(context, MaterialPageRoute(builder: (context) => BPage()));
+              },
+            ),
+            ListTile(
+              leading: Icon(Icons.more),
+              title: Text(tr('loop_in_Row')),
+              onTap: () {
+                Navigator.pop(context);
+                Navigator.push(context, MaterialPageRoute(builder: (context) => CPage()));
               },
             ),
           ],

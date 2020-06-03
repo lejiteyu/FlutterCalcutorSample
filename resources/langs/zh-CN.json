@@ -4,5 +4,6 @@
   "about_Me": "關於我",
   "next_page": "下一頁",
   "page_b_title": "我是B頁",
-  "back_front_page": "返回首頁"
+  "back_front_page": "返回首頁",
+  "loop_in_Row": "使用For迴圈建立Row"
 }
