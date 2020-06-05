@@ -9,6 +9,8 @@ import 'package:package_info/package_info.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 
+import 'menu_drawer.dart';
+
 void main() {
   runApp(
       EasyLocalization(
@@ -203,40 +205,7 @@ class _MyHomePageState extends State<MyHomePage> {
         ],
       ),
       drawer: Drawer(
-        child: ListView(
-          children: <Widget>[
-            UserAccountsDrawerHeader(
-              accountName: Text('Lyon flutter make app'),
-              accountEmail: Text(_appVersion),
-              currentAccountPicture: Image.asset('resources/images/lyonhsu3_t.png'),
-              decoration: BoxDecoration(color: Colors.grey),
-            ),
-            ListTile(
-              leading: Icon(Icons.info),
-              title: Text(tr('about_Me')),
-              onTap: () {
-                Navigator.pop(context);
-                showMyMaterialDialog(context);
-              },
-            ),
-            ListTile(
-              leading: Icon(Icons.more),
-              title: Text(tr('next_page')),
-              onTap: () {
-                Navigator.pop(context);
-                Navigator.push(context, MaterialPageRoute(builder: (context) => BPage()));
-              },
-            ),
-            ListTile(
-              leading: Icon(Icons.more),
-              title: Text(tr('loop_in_Row')),
-              onTap: () {
-                Navigator.pop(context);
-                Navigator.push(context, MaterialPageRoute(builder: (context) => CPage()));
-              },
-            ),
-          ],
-        ),
+        child: MenuStatefulWidget()
       ),
       body:SingleChildScrollView(
         child: Column(
