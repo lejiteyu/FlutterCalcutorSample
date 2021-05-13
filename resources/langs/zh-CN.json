@@ -1,5 +1,6 @@
 {
-  "title":"這是Lyon 開發的Flutter 計算機!",
+  "app_name": "Lyon的計算機",
+  "title":"Lyon的計算機!",
   "ok": "確認",
   "about_Me": "關於我",
   "next_page": "下一頁",

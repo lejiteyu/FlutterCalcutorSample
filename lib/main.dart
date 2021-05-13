@@ -144,7 +144,7 @@ class _MyHomePageState extends State<MyHomePage> {
         context: context,
         builder: (context) {
           return new AlertDialog(
-            title: new Text("title"),
+            title: new Text(tr('app_name')),
             content: new Text(
               tr('title'),
               // 加大字体, 便于演示
